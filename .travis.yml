@@ -3,6 +3,10 @@ dist: focal
 services:
   - docker
 
+branches:
+  only:
+  - master
+
 jobs:
   include:
     - stage: build docker image
