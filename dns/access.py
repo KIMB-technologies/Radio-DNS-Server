@@ -25,7 +25,7 @@ class Access():
 			return True
 		
 		try:
-			client_ip = ipaddress.ip_address(client_ip)
+			client_ip = str(ipaddress.ip_address(client_ip))
 		except ValueError:
 			return False
 

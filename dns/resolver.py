@@ -34,6 +34,6 @@ class Resolver(ProxyResolver):
 				return super().resolve(request, handler)
 		
 		else:
-			print("Clients IP not allowed, send empty answer!")
+			print("Client IP not allowed, send empty answer!")
 			return request.reply()
 
