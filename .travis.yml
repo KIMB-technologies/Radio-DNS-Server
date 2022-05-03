@@ -10,4 +10,4 @@ branches:
 jobs:
   include:
     - stage: build docker image
-      script: bash ./dockerpublish.sh
+      script: bash ./docker/dockerpublish.sh
