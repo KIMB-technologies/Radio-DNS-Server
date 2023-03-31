@@ -2,7 +2,7 @@
 for https://github.com/KIMB-technologies/Radio-API
 
 > See the Docker Image at https://hub.docker.com/r/kimbtechnologies/radio_dns  
-> Travis CI Autobuild from https://github.com/KIMB-technologies/Radio-DNS-Server
+> Github Action build of https://github.com/KIMB-technologies/Radio-DNS-Server
 
 ## Configuration
 
