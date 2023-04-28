@@ -9,7 +9,7 @@ on:
 env:
   IMAGE_OWNER: kimbtechnologies
   IMAGE_NAME: radio_dns
-  BASE_IMAGE: ubuntu:22.04
+  BASE_IMAGE: library/ubuntu:22.04
 
 jobs:
   build:
