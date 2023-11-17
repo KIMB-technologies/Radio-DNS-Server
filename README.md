@@ -22,7 +22,7 @@ The configuration is done using env variables.
 Run using the [**Docker-compose Example**](./docker-compose.yml)!
 
 ## Notice and Used Libraries
-- Ubuntu [Docker Image](https://hub.docker.com/_/ubuntu)
+- Alpine [Docker Image](https://hub.docker.com/_/alpine)
 - [Python 3](https://www.python.org/)
 - Python [DnsLib](https://pypi.org/project/dnslib/)
 - Code inspired from [DNSServer](https://github.com/samuelcolvin/dnserver)  

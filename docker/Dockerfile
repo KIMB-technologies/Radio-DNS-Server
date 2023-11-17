@@ -3,7 +3,7 @@ FROM alpine
 ARG H_UID=1000
 ARG H_GID=1000
 
-RUN apk add --no-cache -X http://dl-cdn.alpinelinux.org/alpine/edge/testing \
+RUN apk add --no-cache --update -X http://dl-cdn.alpinelinux.org/alpine/edge/testing \
       python3 py3-pip libcap libcap2 py3-dnslib
 
 # setup system and user
@@ -13,7 +13,6 @@ RUN ln -s /usr/bin/python3 /usr/local/bin/python \
       && setcap CAP_NET_BIND_SERVICE=+eip "$(readlink -f /usr/bin/python3)"
 
 # install the code of the repo
-RUN python3 -m pip install --no-cache-dir --upgrade pip
 COPY ./docker/setup.py /home/user/
 RUN pip3 install -e /home/user/
 
