@@ -21,24 +21,36 @@ class Config():
 			"BIND": str(os.getenv("SERVER_BIND", "0.0.0.0")),
 			"PORT": int(os.getenv("SERVER_PORT", 53)),
 			"UPSTREAM": str(os.getenv("SERVER_UPSTREAM", "8.8.8.8")),
-			"RADIO": str(os.getenv("RADIO_DOMAIN", None)),
+			"RADIO": str(os.getenv("RADIO_DOMAIN", os.getenv("RADIO_IP", None))),
 			"TIME" : str(os.getenv("TIME_SERVER", "ntp0.fau.de")),
 			"ALLOWED" : str(os.getenv("ALLOWED_DOMAIN", "all")),
 			"DEVMODE" : bool(os.getenv("DEVMODE", "false") == "true")
 		}
 
-		for (k,n) in [("BIND", "SERVER_BIND"), ("UPSTREAM", "SERVER_UPSTREAM")]:
+		radio_is_ip, radio_is_domain = True, True
+
+		if cls._data["RADIO"] is None:
+			raise RuntimeError("$ENV[RADIO_DOMAIN] and $ENV[RADIO_IP] not set")
+
+		for (k,n) in [("BIND", "SERVER_BIND"), ("UPSTREAM", "SERVER_UPSTREAM"), ("RADIO", "RADIO_IP")]:
 			try:
 				ipaddress.ip_address(cls._data[k])	
 			except ValueError:
-				raise RuntimeError("$ENV[%s] invalid IP address" % n)
-
-		if cls._data["RADIO"] is None:
-			raise RuntimeError("$ENV[RADIO_DOMAIN] not set")
+				if k == "RADIO":
+					radio_is_ip = False # value "RADIO" is not an ip address!
+				else:
+					raise RuntimeError("$ENV[%s] invalid IP address" % n)
 
 		for (k,n) in [("RADIO", "RADIO_DOMAIN"), ("TIME", "TIME_SERVER")]:
 			if not cls._validate_domain(cls, cls._data[k]):
-				raise RuntimeError("$ENV[%s] invalid domain name" % n)
+				if k == "RADIO":
+					radio_is_domain = False # value "RADIO" is not a domain!
+				else:
+					raise RuntimeError("$ENV[%s] invalid domain name" % n)
+
+		if not radio_is_domain and not radio_is_ip:
+			raise RuntimeError("$ENV[RADIO_DOMAIN] is no domain and $ENV[RADIO_IP] is no IP address!")
+		cls._data["DO_LOOKUP"] = radio_is_domain
 
 		if cls._data["ALLOWED"] != "all":
 			cls._data["ALLOWED"] = cls._data["ALLOWED"].split(",")
