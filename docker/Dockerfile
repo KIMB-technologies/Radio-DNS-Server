@@ -14,7 +14,7 @@ RUN ln -s /usr/bin/python3 /usr/local/bin/python \
 
 # install the code of the repo
 COPY ./docker/setup.py /home/user/
-RUN pip3 install -e /home/user/
+RUN pip3 install -e /home/user/ --break-system-packages 
 
 # add source
 COPY --chown=user:user ./dns /home/user/dns/
