@@ -3,8 +3,8 @@ FROM alpine
 ARG H_UID=1000
 ARG H_GID=1000
 
-RUN apk add --no-cache --update -X http://dl-cdn.alpinelinux.org/alpine/edge/testing \
-      python3 py3-pip libcap libcap2 py3-dnslib
+RUN apk add --no-cache --update python3 py3-pip libcap libcap2 \
+      && pip3 install --break-system-packages --no-cache-dir dnslib
 
 # setup system and user
 RUN ln -s /usr/bin/python3 /usr/local/bin/python \

@@ -13,4 +13,5 @@ services:
       #- RADIO_IP=192.168.0.41 # the place where https://github.com/KIMB-technologies/Radio-API ist hosted (if only available via IP and no domain, comment RADIO_DOMAIN)
       - ALLOWED_DOMAIN=home.example.com,home2.example.com # the domains of the home routers (DynDNS) as list divided by ',' or 'all' to allow all sources for the requests
       - TIME_SERVER=ntp0.fau.de # the NTP time server used by the radio (may be changed)
+      - ENABLE_UPDATE=false # set to true to enable dns resolving of update server for radios
     restart: unless-stopped

@@ -10,6 +10,7 @@ class Hama():
 
 	_DOMAIN = "wifiradiofrontier.com."
 	_TIME_DOMAIN = "time.wifiradiofrontier.com."
+	_UPDATE_DOMAIN = "update.wifiradiofrontier.com."
 
 	def __init__(self):
 		self.do_lookup = Config["DO_LOOKUP"]
@@ -25,6 +26,8 @@ class Hama():
 	def fetch_answer(self, question:DNSQuestion) -> Union[RR, None]:
 		if question.qname.matchSuffix(self._TIME_DOMAIN):
 			ip_address = DNSClient.resolve_a(Config["TIME"])
+		elif Config["UPDATE"] and question.qname.matchSuffix(self._UPDATE_DOMAIN):
+			ip_address = DNSClient.resolve_a(self._UPDATE_DOMAIN)
 		else:
 			ip_address = DNSClient.resolve_a(Config["RADIO"]) if self.do_lookup else Config["RADIO"]
 

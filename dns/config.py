@@ -23,6 +23,7 @@ class Config():
 			"UPSTREAM": str(os.getenv("SERVER_UPSTREAM", "8.8.8.8")),
 			"RADIO": str(os.getenv("RADIO_DOMAIN", os.getenv("RADIO_IP", None))),
 			"TIME" : str(os.getenv("TIME_SERVER", "ntp0.fau.de")),
+			"UPDATE" : bool(os.getenv("ENABLE_UPDATE", "false") == "true"),
 			"ALLOWED" : str(os.getenv("ALLOWED_DOMAIN", "all")),
 			"DEVMODE" : bool(os.getenv("DEVMODE", "false") == "true")
 		}

@@ -18,4 +18,5 @@ services:
       - RADIO_IP=192.168.0.41
       - ALLOWED_DOMAIN=all
       - TIME_SERVER=ntp0.fau.de
+      - ENABLE_UPDATE=true
     restart: always
