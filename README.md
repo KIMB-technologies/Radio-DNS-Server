@@ -20,6 +20,8 @@ The configuration is done using env variables.
 - `TIME_SERVER` *(optional, default `ntp0.fau.de`)* If the DNS server is queried for `time.wifiradiofrontier.com` it will answer with the `A` record of this domain. So one does not have to host an own NTP server at `RADIO_DOMAIN`. Per default some time server is used.
 - `ENABLE_UPDATE` *(optional, default `false`)* Set to `true` to enable responding to DNS queries for `update.wifiradiofrontier.com` with the `A` record of `update.wifiradiofrontier.com` instead of the ip of Radio-API. (This will allow the radio to do updates. Performing updates is a trade-off between risking changes to the API, that may prevent Radio-API from working, and bug fixes and security implications for the radio's software.)
 
+Besides the domain `wifiradiofrontier.com` also the domain `internetradiofrontier.com` is considered as domain to tamper DNS queries for.
+
 Run using the [**Docker-compose Example**](./docker-compose.yml)!
 
 ## Notice and Used Libraries

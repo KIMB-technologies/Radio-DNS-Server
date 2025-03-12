@@ -8,26 +8,26 @@ from dns.client import DNSClient
 
 class Hama():
 
-	_DOMAIN = "wifiradiofrontier.com."
-	_TIME_DOMAIN = "time.wifiradiofrontier.com."
-	_UPDATE_DOMAIN = "update.wifiradiofrontier.com."
+	_DOMAINS = ("wifiradiofrontier.com.", "internetradiofrontier.com.")
+	_TIME_SUB_DOMAIN = "time.*"
+	_UPDATE_SUB_DOMAIN = "update.*"
 
 	def __init__(self):
 		self.do_lookup = Config["DO_LOOKUP"]
 
 	def match_domain(self, question:DNSQuestion) -> bool:
 		if isinstance(question, DNSQuestion):
-			if question.qname.matchSuffix(self._DOMAIN):
+			if any(question.qname.matchSuffix(domain) for domain in self._DOMAINS):
 				if question.qtype == QTYPE.A:
 					return True
 
 		return False
 
 	def fetch_answer(self, question:DNSQuestion) -> Union[RR, None]:
-		if question.qname.matchSuffix(self._TIME_DOMAIN):
+		if question.qname.matchGlob(self._TIME_SUB_DOMAIN):
 			ip_address = DNSClient.resolve_a(Config["TIME"])
-		elif Config["UPDATE"] and question.qname.matchSuffix(self._UPDATE_DOMAIN):
-			ip_address = DNSClient.resolve_a(self._UPDATE_DOMAIN)
+		elif Config["UPDATE"] and question.qname.matchGlob(self._UPDATE_SUB_DOMAIN):
+			ip_address = DNSClient.resolve_a(str(question.qname))
 		else:
 			ip_address = DNSClient.resolve_a(Config["RADIO"]) if self.do_lookup else Config["RADIO"]
 

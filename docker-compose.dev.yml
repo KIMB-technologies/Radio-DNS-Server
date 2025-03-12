@@ -14,7 +14,7 @@ services:
       - SERVER_BIND=0.0.0.0
       - SERVER_UPSTREAM=8.8.8.8
       - SERVER_PORT=53
-      - RADIO_DOMAIN=example.com
+      #- RADIO_DOMAIN=example.com
       - RADIO_IP=192.168.0.41
       - ALLOWED_DOMAIN=all
       - TIME_SERVER=ntp0.fau.de

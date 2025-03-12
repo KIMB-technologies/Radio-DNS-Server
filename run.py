@@ -9,7 +9,7 @@ if __name__ == "__main__":
 
 	if Config["DEVMODE"]:
 		print("Devmode enabled, no server will be started!")
-		print("\tAttach to container and start manually.")
+		print("\tAttach to container and start manually, i.e., 'python -m dns.server'")
 
 		while True:
 			time.sleep(1)
